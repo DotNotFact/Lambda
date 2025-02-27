@@ -1,4 +1,4 @@
-@import '../../../assets/styles/_variables';
+@use 'variables' as *;
 
 .header {
 	display: flex;
@@ -10,5 +10,6 @@
 		border: none;
 		outline: none;
 		cursor: pointer;
+		background-color: $black;
 	}
 }
