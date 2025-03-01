@@ -1,4 +1,4 @@
-import Header from './header/Header.tsx'
+import Header from './header/Header'
 
 const Layout = ({ children }: Props) => {
 	return (

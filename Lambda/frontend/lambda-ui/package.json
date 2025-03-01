@@ -1,5 +1,5 @@
 {
-	"name": "lambda-client",
+	"name": "lambda-ui",
 	"author": {
 		"name": "DotNotFact"
 	},
@@ -25,9 +25,10 @@
 		"eslint-plugin-react-hooks": "^5.0.0",
 		"eslint-plugin-react-refresh": "^0.4.18",
 		"globals": "^15.14.0",
-		"sass-embedded": "^1.85.0",
+		"sass-embedded": "^1.85.1",
 		"typescript": "~5.7.2",
 		"typescript-eslint": "^8.22.0",
-		"vite": "^6.1.0"
+		"vite": "^6.1.0",
+		"vite-tsconfig-paths": "^5.1.4"
 	}
 }
