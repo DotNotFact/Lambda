@@ -1,9 +1,25 @@
-﻿<Application x:Class="LambdaUI.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:LambdaUI"
-             StartupUri="MainWindow.xaml">
+﻿<Application
+    x:Class="LambdaUI.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:LambdaUI.Views.Controls.Converters"
+    xmlns:local="clr-namespace:LambdaUI"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" 
+    Exit="OnExit"
+    Startup="OnStartup">
+
     <Application.Resources>
-         
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ui:ThemesDictionary Theme="Dark" />
+                <ui:ControlsDictionary />
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:ThemeToIndexConverter x:Key="ThemeToIndexConverter" />
+
+        </ResourceDictionary>
+
     </Application.Resources>
+
 </Application>

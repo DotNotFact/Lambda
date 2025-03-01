@@ -1,0 +1,250 @@
+﻿<!--  File: Views/Pages/AdministrationPage.xaml  -->
+<Page
+    x:Class="LambdaUI.Views.Pages.AdministrationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="Administration"
+    mc:Ignorable="d">
+    <StackPanel Margin="5">
+
+        <TextBlock
+            Margin="10"
+            FontSize="24"
+            FontWeight="Bold"
+            Foreground="White"
+            Text="TODO: Скоро" />
+        <Grid Margin="5" Visibility="Hidden">
+            <!--  Заголовок страницы  -->
+            <TextBlock
+                Margin="0,0,0,20"
+                FontSize="28"
+                FontWeight="Bold"
+                Text="Администрирование" />
+
+
+            <!--  Добавьте фильтрацию в AdministrationPage.xaml  -->
+            <StackPanel
+                Margin="0,0,0,10"
+                HorizontalAlignment="Stretch"
+                Orientation="Horizontal">
+                <!--  Поле поиска  -->
+                <TextBlock Text="Поиск" />
+                <TextBox
+                    Width="200"
+                    Height="40"
+                    Margin="0,0,10,0"
+                    Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" />
+                <!--  Фильтр по дате  -->
+                <TextBlock Text="Фильтр по дате" />
+                <DatePicker
+                    Width="200"
+                    Height="40"
+                    SelectedDate="{Binding SelectedDate, UpdateSourceTrigger=PropertyChanged}" />
+                <!--  Фильтр по пользователю  -->
+                <TextBlock Text="Фильтр по пользователю" />
+                <ComboBox
+                    Width="200"
+                    Height="40"
+                    ItemsSource="{Binding Users}"
+                    SelectedItem="{Binding SelectedUser, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+
+            <!--  Вкладки для различных разделов администрирования  -->
+            <TabControl Margin="0,0,0,10">
+                <!--  Вкладка "Управление пользователями"  -->
+                <TabItem Header="Управление пользователями">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <!--  Панель инструментов  -->
+                        <StackPanel
+                            Margin="0,0,0,10"
+                            HorizontalAlignment="Stretch"
+                            Orientation="Horizontal">
+                            <!--  Кнопка для добавления нового пользователя  -->
+                            <Button
+                                Width="150"
+                                Height="40"
+                                Margin="0,0,10,0"
+                                Command="{Binding AddUserCommand}"
+                                Content="Добавить пользователя" />
+                            <!--  Поле поиска  -->
+                            <TextBlock Text="Поиск" />
+                            <TextBox
+                                Width="200"
+                                Height="40"
+                                Margin="0,0,10,0"
+                                Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                        <!--  Таблица с данными о пользователях  -->
+                        <DataGrid
+                            Grid.Row="1"
+                            Margin="0,0,0,10"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            HeadersVisibility="Column"
+                            ItemsSource="{Binding Users}"
+                            SelectionMode="Single">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn
+                                    Width="200"
+                                    Binding="{Binding Uid}"
+                                    Header="ID" />
+                                <DataGridTextColumn
+                                    Width="200"
+                                    Binding="{Binding Username}"
+                                    Header="Имя пользователя" />
+                                <DataGridTextColumn
+                                    Width="250"
+                                    Binding="{Binding Email}"
+                                    Header="Email" />
+                                <DataGridComboBoxColumn Width="150" Header="Роль">
+                                    <DataGridComboBoxColumn.ElementStyle>
+                                        <Style TargetType="ComboBox">
+                                            <Setter Property="ItemsSource" Value="{Binding DataContext.Roles, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                            <Setter Property="SelectedItem" Value="{Binding Role, Mode=TwoWay}" />
+                                        </Style>
+                                    </DataGridComboBoxColumn.ElementStyle>
+                                    <DataGridComboBoxColumn.EditingElementStyle>
+                                        <Style TargetType="ComboBox">
+                                            <Setter Property="ItemsSource" Value="{Binding DataContext.Roles, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                            <Setter Property="SelectedItem" Value="{Binding Role, Mode=TwoWay}" />
+                                        </Style>
+                                    </DataGridComboBoxColumn.EditingElementStyle>
+                                </DataGridComboBoxColumn>
+                                <DataGridTemplateColumn Width="150" Header="Действия">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button
+                                                    Command="{Binding DataContext.EditUserCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                    CommandParameter="{Binding Uid}"
+                                                    Content="Редактировать" />
+                                                <Button
+                                                    Margin="5,0,0,0"
+                                                    Command="{Binding DataContext.DeleteUserCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                    CommandParameter="{Binding Uid}"
+                                                    Content="Удалить" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+
+                <!--  Вкладка "Управление правами доступа"  -->
+                <TabItem Header="Управление правами доступа">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <!--  Панель инструментов  -->
+                        <StackPanel
+                            Margin="0,0,0,10"
+                            HorizontalAlignment="Stretch"
+                            Orientation="Horizontal">
+                            <!--  Кнопка для добавления нового права доступа  -->
+                            <Button
+                                Width="200"
+                                Height="40"
+                                Margin="0,0,10,0"
+                                Command="{Binding AddAccessRightCommand}"
+                                Content="Добавить право доступа" />
+                            <!--  Поле поиска  -->
+                            <TextBlock Text="Поиск" />
+                            <TextBox
+                                Width="200"
+                                Height="40"
+                                Margin="0,0,10,0"
+                                Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                        <!--  Таблица с данными о правах доступа  -->
+                        <DataGrid
+                            Grid.Row="1"
+                            Margin="0,0,0,10"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            HeadersVisibility="Column"
+                            ItemsSource="{Binding AccessRights}"
+                            SelectionMode="Single">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn
+                                    Width="200"
+                                    Binding="{Binding Uid}"
+                                    Header="ID" />
+                                <DataGridTextColumn
+                                    Width="200"
+                                    Binding="{Binding Role}"
+                                    Header="Роль" />
+                                <DataGridTextColumn
+                                    Width="250"
+                                    Binding="{Binding Right}"
+                                    Header="Право" />
+                                <DataGridTemplateColumn Width="150" Header="Действия">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button
+                                                    Command="{Binding DataContext.EditAccessRightCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                    CommandParameter="{Binding Uid}"
+                                                    Content="Редактировать" />
+                                                <Button
+                                                    Margin="5,0,0,0"
+                                                    Command="{Binding DataContext.DeleteAccessRightCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                    CommandParameter="{Binding Uid}"
+                                                    Content="Удалить" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+
+                <!--  Вкладка "Резервное копирование"  -->
+                <TabItem Header="Резервное копирование">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <!--  Панель инструментов  -->
+                        <StackPanel
+                            Margin="0,0,0,10"
+                            HorizontalAlignment="Stretch"
+                            Orientation="Horizontal">
+                            <!--  Кнопка для запуска резервного копирования  -->
+                            <Button
+                                Width="200"
+                                Height="40"
+                                Margin="0,0,10,0"
+                                Command="{Binding StartBackupCommand}"
+                                Content="Запустить резервное копирование" />
+                            <!--  Кнопка для восстановления данных  -->
+                            <Button
+                                Width="150"
+                                Height="40"
+                                Margin="0,0,10,0"
+                                Command="{Binding RestoreBackupCommand}"
+                                Content="Восстановить данные" />
+                        </StackPanel>
+                        <!--  Информация о последнем резервном копировании  -->
+                        <TextBlock
+                            Grid.Row="1"
+                            Margin="0,10,0,0"
+                            Text="{Binding LastBackupInfo}" />
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </StackPanel>
+</Page>

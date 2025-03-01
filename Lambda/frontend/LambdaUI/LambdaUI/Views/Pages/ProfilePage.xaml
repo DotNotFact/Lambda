@@ -1,0 +1,389 @@
+﻿<Page
+    x:Class="LambdaUI.Views.Pages.ProfilePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="Profile"
+    mc:Ignorable="d">
+
+    <Grid Margin="5">
+
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+
+        </Grid.ColumnDefinitions>
+
+        <Border
+            Grid.Column="0"
+            Width="230"
+            Margin="0,0,10,0"
+            Background="#2D2D2D"
+            CornerRadius="4">
+
+            <StackPanel Margin="10,16" Orientation="Vertical">
+
+                <Ellipse
+                    Width="150"
+                    Height="150"
+                    Margin="0,0,0,16">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="https://pp.userapi.com/pxWvuDGn4W74u8_YboYdFapCLP7YfcsCobHvEw/Dvd0KfedB2c.jpg" Stretch="UniformToFill" />
+                    </Ellipse.Fill>
+                </Ellipse>
+
+                <Border
+                    Margin="0,0,0,16"
+                    Background="Transparent"
+                    BorderBrush="#3D3D3D"
+                    BorderThickness="0,2,0,2">
+
+                    <TextBlock
+                        Margin="5,10"
+                        FontSize="16"
+                        FontWeight="SemiBold"
+                        Foreground="White"
+                        Text="Данила" />
+
+                </Border>
+
+                <StackPanel>
+
+                    <ui:CardControl>
+                        <ui:CardControl.Header>
+                            <StackPanel>
+                                <ui:TextBlock
+                                    Margin="0"
+                                    FontTypography="BodyStrong"
+                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                    Text="Возраст:"
+                                    TextWrapping="WrapWithOverflow" />
+                                <ui:TextBlock
+                                    Appearance="Secondary"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                    Text="20"
+                                    TextWrapping="WrapWithOverflow" />
+                            </StackPanel>
+                        </ui:CardControl.Header>
+                    </ui:CardControl>
+
+                    <ui:CardControl>
+                        <ui:CardControl.Header>
+                            <StackPanel>
+                                <ui:TextBlock
+                                    Margin="0"
+                                    FontTypography="BodyStrong"
+                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                    Text="Город:"
+                                    TextWrapping="WrapWithOverflow" />
+                                <ui:TextBlock
+                                    Appearance="Secondary"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                    Text="Ессентюк"
+                                    TextWrapping="WrapWithOverflow" />
+                            </StackPanel>
+                        </ui:CardControl.Header>
+                    </ui:CardControl>
+
+                    <ui:CardControl>
+                        <ui:CardControl.Header>
+                            <StackPanel>
+                                <ui:TextBlock
+                                    Margin="0"
+                                    FontTypography="BodyStrong"
+                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                    Text="Пол:"
+                                    TextWrapping="WrapWithOverflow" />
+                                <ui:TextBlock
+                                    Appearance="Secondary"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                    Text="«не опознано»"
+                                    TextWrapping="WrapWithOverflow" />
+                            </StackPanel>
+                        </ui:CardControl.Header>
+                    </ui:CardControl>
+
+                    <ui:CardControl>
+                        <ui:CardControl.Header>
+                            <StackPanel>
+                                <ui:TextBlock
+                                    Margin="0"
+                                    FontTypography="BodyStrong"
+                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                    Text="Семейное положение:"
+                                    TextWrapping="WrapWithOverflow" />
+                                <ui:TextBlock
+                                    Appearance="Secondary"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                    Text="в активном поиске"
+                                    TextWrapping="WrapWithOverflow" />
+                            </StackPanel>
+                        </ui:CardControl.Header>
+                    </ui:CardControl>
+
+                    <ui:CardControl>
+                        <ui:CardControl.Header>
+                            <StackPanel>
+                                <ui:TextBlock
+                                    Margin="0"
+                                    FontTypography="BodyStrong"
+                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                    Text="Профессия:"
+                                    TextWrapping="WrapWithOverflow" />
+                                <ui:TextBlock
+                                    Appearance="Secondary"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                    Text=".net fullstack"
+                                    TextWrapping="WrapWithOverflow" />
+                            </StackPanel>
+                        </ui:CardControl.Header>
+                    </ui:CardControl>
+
+                </StackPanel>
+
+            </StackPanel>
+
+        </Border>
+
+        <StackPanel Grid.Column="1">
+
+            <!--  Информация о пользователе  -->
+            <StackPanel Orientation="Vertical">
+
+                <TextBlock
+                    Margin="0,0,0,10"
+                    HorizontalAlignment="Left"
+                    FontSize="16"
+                    Foreground="Gray"
+                    Text="Профиль пользователя" />
+
+                <Border Background="#2D2D2D" CornerRadius="5">
+
+                    <StackPanel Margin="10" Orientation="Vertical">
+                        <TextBlock
+                            FontSize="16"
+                            FontWeight="SemiBold"
+                            Foreground="White"
+                            Text="Имя пользователя:" />
+                        <TextBlock
+                            FontSize="16"
+                            Foreground="LightGray"
+                            Text="{Binding ViewModel.CurrentUser.Username}" />
+                        <TextBlock
+                            Margin="0,10,0,0"
+                            FontSize="16"
+                            FontWeight="SemiBold"
+                            Foreground="White"
+                            Text="Электронная почта:" />
+                        <TextBlock
+                            FontSize="16"
+                            Foreground="LightGray"
+                            Text="{Binding ViewModel.CurrentUser.Email}" />
+                        <TextBlock
+                            Margin="0,10,0,0"
+                            FontSize="16"
+                            FontWeight="SemiBold"
+                            Foreground="White"
+                            Text="Роль:" />
+                        <TextBlock
+                            FontSize="16"
+                            Foreground="LightGray"
+                            Text="{Binding ViewModel.CurrentUser.Role}" />
+                    </StackPanel>
+
+                </Border>
+
+            </StackPanel>
+
+            <!--  Ключевые показатели  -->
+            <StackPanel Margin="0,10,0,0" Orientation="Vertical">
+
+                <TextBlock
+                    Margin="0,0,0,10"
+                    HorizontalAlignment="Left"
+                    FontSize="16"
+                    Foreground="Gray"
+                    Text="Ключевые показатели (Ученик)" />
+
+                <UniformGrid Columns="2">
+
+                    <!--  Количество групп  -->
+                    <ui:CardControl ToolTipService.ToolTip="ИСиП - Информационные Технологии и Программирование">
+                        <ui:CardControl.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Symbol="Person16" />
+                                <TextBlock
+                                    Margin="5,0,0,0"
+                                    FontSize="16"
+                                    Text="Группа" />
+                            </StackPanel>
+                        </ui:CardControl.Header>
+                        <TextBlock
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Text="ИСиП 21/1" />
+                    </ui:CardControl>
+
+                    <!--  Количество курсов  -->
+                    <ui:CardControl>
+                        <ui:CardControl.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Symbol="Book24" />
+                                <TextBlock
+                                    Margin="5,0,0,0"
+                                    FontSize="16"
+                                    Text="Курс" />
+                            </StackPanel>
+                        </ui:CardControl.Header>
+                        <TextBlock
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Text="4" />
+                    </ui:CardControl>
+
+                </UniformGrid>
+
+            </StackPanel>
+
+            <StackPanel Margin="0,10,0,0" Orientation="Vertical">
+
+                <TextBlock
+                    Margin="0,0,0,10"
+                    HorizontalAlignment="Left"
+                    FontSize="16"
+                    Foreground="Gray"
+                    Text="Ключевые показатели (Учитель)" />
+
+                <UniformGrid Columns="2">
+
+                    <!--  Количество групп  -->
+                    <ui:CardControl>
+                        <ui:CardControl.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Symbol="Person16" />
+                                <TextBlock
+                                    Margin="5,0,0,0"
+                                    FontSize="16"
+                                    Text="Группы" />
+                            </StackPanel>
+                        </ui:CardControl.Header>
+                        <TextBlock
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Text="{Binding ViewModel.TotalGroups}" />
+                    </ui:CardControl>
+
+                    <!--  Количество курсов  -->
+                    <ui:CardControl>
+                        <ui:CardControl.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Symbol="Book24" />
+                                <TextBlock
+                                    Margin="5,0,0,0"
+                                    FontSize="16"
+                                    Text="Ученики" />
+                            </StackPanel>
+                        </ui:CardControl.Header>
+                        <TextBlock
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Text="154" />
+                    </ui:CardControl>
+                </UniformGrid>
+
+            </StackPanel>
+
+            <StackPanel Margin="0,10,0,0" Orientation="Vertical">
+
+                <TextBlock
+                    Margin="0,0,0,10"
+                    HorizontalAlignment="Left"
+                    FontSize="16"
+                    Foreground="Gray"
+                    Text="Ключевые показатели (Директор)" />
+
+                <UniformGrid Columns="2">
+
+                    <!--  Количество групп  -->
+                    <ui:CardControl>
+                        <ui:CardControl.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Symbol="Person16" />
+                                <TextBlock
+                                    Margin="5,0,0,0"
+                                    FontSize="16"
+                                    Text="Персонал" />
+                            </StackPanel>
+                        </ui:CardControl.Header>
+                        <TextBlock
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Text="111" />
+                    </ui:CardControl>
+
+                    <!--  Количество курсов  -->
+                    <ui:CardControl>
+                        <ui:CardControl.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Symbol="Book24" />
+                                <TextBlock
+                                    Margin="5,0,0,0"
+                                    FontSize="16"
+                                    Text="Ученики" />
+                            </StackPanel>
+                        </ui:CardControl.Header>
+                        <TextBlock
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Text="4215" />
+                    </ui:CardControl>
+                </UniformGrid>
+
+            </StackPanel>
+
+            <!--  Последние действия  -->
+            <StackPanel Margin="0,10,0,0" Orientation="Vertical">
+
+                <TextBlock
+                    Margin="0,0,0,10"
+                    HorizontalAlignment="Left"
+                    FontSize="16"
+                    Foreground="Gray"
+                    Text="Последние действия" />
+
+                <DataGrid
+                    Margin="0,0,0,10"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    CanUserResizeColumns="False"
+                    CanUserResizeRows="False"
+                    HeadersVisibility="Column"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding ViewModel.RecentActivities}"
+                    SelectionMode="Single">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding Action}"
+                            Header="Действие" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding Date, StringFormat=hh:mm:ss / dd.MM.yyyy}"
+                            Header="Дата" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding User}"
+                            Header="Пользователь" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+
+        </StackPanel>
+
+    </Grid>
+
+</Page>
