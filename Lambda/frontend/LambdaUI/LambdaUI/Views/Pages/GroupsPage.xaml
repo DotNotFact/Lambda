@@ -1,0 +1,150 @@
+﻿<Page
+    x:Class="LambdaUI.Views.Pages.GroupsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="Groups"
+    mc:Ignorable="d">
+
+    <Grid Margin="5">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  Панель инструментов  -->
+        <StackPanel
+            Grid.Row="0"
+            Margin="0,0,0,10"
+            Orientation="Horizontal">
+
+            <StackPanel
+                Margin="0,0,10,0"
+                VerticalAlignment="Bottom"
+                Orientation="Horizontal">
+
+                <Button
+                    Margin="0,0,10,0"
+                    Command="{Binding ViewModel.AddGroupCommand}"
+                    Content="Добавить группу" />
+
+                <Button Command="{Binding ViewModel.ImportGroupsCommand}" Content="Импорт групп" />
+
+            </StackPanel>
+
+            <TextBlock
+                Margin="0,0,10,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="16"
+                Foreground="Gray"
+                Text="Поиск:" />
+
+            <TextBox
+                Width="160"
+                Margin="0,0,10,0"
+                Text="{Binding ViewModel.SearchQuery, UpdateSourceTrigger=PropertyChanged}" />
+
+            <ComboBox
+                Width="160"
+                Margin="0,0,10,0"
+                DisplayMemberPath="FullName"
+                ItemsSource="{Binding ViewModel.Teachers}"
+                SelectedItem="{Binding ViewModel.SelectedTeacher, UpdateSourceTrigger=PropertyChanged}" />
+
+        </StackPanel>
+
+        <!--  DataGrid и фильтры  -->
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!--  DataGrid  -->
+            <DataGrid
+                Grid.Column="0"
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                HeadersVisibility="Column"
+                IsReadOnly="True"
+                ItemsSource="{Binding ViewModel.Groups}"
+                SelectionMode="Single">
+                <DataGrid.Columns>
+                    <!--<DataGridTextColumn
+                        Width="200"
+                        Binding="{Binding ViewModel.Uid}"
+                        Header="ID" />-->
+                    <DataGridTextColumn
+                        Width="2*"
+                        Binding="{Binding Name}"
+                        Header="Название группы" />
+                    <DataGridTextColumn
+                        Width="2*"
+                        Binding="{Binding Teacher.FullName}"
+                        Header="Преподаватель" />
+                    <DataGridTemplateColumn Width="*" Header="Действия">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <!--  Command="{Binding DataContext.EditGroupCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"  -->
+                                    <ui:Button
+                                        CommandParameter="{Binding Uid}"
+                                        Cursor="Hand"
+                                        Icon="Pen32">
+                                        <ui:SymbolIcon Symbol="Pen32" />
+                                    </ui:Button>
+                                    <!--  Command="{Binding DeleteGroupCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"  -->
+                                    <ui:Button
+                                        Margin="5,0,0,0"
+                                        CommandParameter="{Binding Uid}"
+                                        Cursor="Hand">
+                                        <ui:SymbolIcon Symbol="Delete32" />
+                                    </ui:Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!--  Фильтры  -->
+            <StackPanel
+                Grid.Column="1"
+                Margin="10,0,0,0"
+                Orientation="Vertical">
+
+                <TextBlock
+                    Margin="0,0,0,10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    Foreground="Gray"
+                    Text="Фильтры" />
+
+                <ComboBox
+                    Margin="0,0,0,10"
+                    ItemsSource="{Binding ViewModel.FilterOptions}"
+                    SelectedItem="{Binding ViewModel.SelectedFilterOption, UpdateSourceTrigger=PropertyChanged}" />
+
+                <DatePicker Margin="0,0,0,10" SelectedDate="{Binding ViewModel.SelectedDate, UpdateSourceTrigger=PropertyChanged}" />
+
+                <Button
+                    Margin="0,0,0,10"
+                    HorizontalAlignment="Stretch"
+                    Command="{Binding ViewModel.ApplyFiltersCommand}"
+                    Content="Применить фильтры"
+                    Cursor="Hand" />
+
+            </StackPanel>
+
+        </Grid>
+
+    </Grid>
+
+</Page>

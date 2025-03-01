@@ -1,0 +1,137 @@
+﻿<Page
+    x:Class="LambdaUI.Views.Pages.SchedulePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="Schedule"
+    mc:Ignorable="d">
+
+    <StackPanel Margin="5" Orientation="Vertical">
+
+        <!--  Панель инструментов  -->
+        <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
+
+            <StackPanel Margin="0,0,10,0" Orientation="Vertical">
+                <TextBlock
+                    Margin="0,0,0,10"
+                    HorizontalAlignment="Left"
+                    FontSize="16"
+                    Foreground="Gray"
+                    Text="Выберите группу" />
+
+                <ComboBox
+                    HorizontalAlignment="Stretch"
+                    DisplayMemberPath="Name"
+                    ItemsSource="{Binding ViewModel.Groups}"
+                    SelectedItem="{Binding ViewModel.SelectedGroup, UpdateSourceTrigger=PropertyChanged}" />
+
+            </StackPanel>
+
+            <StackPanel Margin="0,0,10,0" Orientation="Vertical">
+
+                <TextBlock
+                    Margin="0,0,0,10"
+                    HorizontalAlignment="Left"
+                    FontSize="16"
+                    Foreground="Gray"
+                    Text="Выберите преподавателя" />
+
+                <ComboBox
+                    HorizontalAlignment="Stretch"
+                    DisplayMemberPath="FullName"
+                    ItemsSource="{Binding ViewModel.Teachers}"
+                    SelectedIndex="0"
+                    SelectedItem="{Binding ViewModel.SelectedTeacher, UpdateSourceTrigger=PropertyChanged}" />
+
+            </StackPanel>
+
+            <StackPanel Margin="0,0,10,0" Orientation="Vertical">
+
+                <TextBlock
+                    Margin="0,0,0,10"
+                    HorizontalAlignment="Left"
+                    FontSize="16"
+                    Foreground="Gray"
+                    Text="Выберите дату" />
+
+                <DatePicker HorizontalAlignment="Stretch" SelectedDate="{Binding ViewModel.SelectedDate, UpdateSourceTrigger=PropertyChanged}" />
+
+            </StackPanel>
+
+            <Button
+                Margin="0,0,10,0"
+                Padding="8"
+                VerticalAlignment="Bottom"
+                Command="{Binding ViewModel.AddRandomLessonCommand}"
+                Content="Добавить случайное занятие" />
+
+        </StackPanel>
+
+        <!--  DataGrid и фильтры  -->
+        <DataGrid
+            Grid.Row="1"
+            Margin="0,0,0,10"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            HeadersVisibility="Column"
+            IsReadOnly="True"
+            ItemsSource="{Binding ViewModel.Lessons}"
+            SelectionMode="Single">
+            <DataGrid.Columns>
+                <!--<DataGridTextColumn
+                    Width="200"
+                    Binding="{Binding Uid}"
+                    Header="ID" />-->
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Group.Name}"
+                    Header="Группа" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Teacher.FullName}"
+                    Header="Преподаватель" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Subject}"
+                    Header="Предмет" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Classroom}"
+                    Header="Аудитория" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding StartTime, StringFormat=HH:mm - dd.MM}"
+                    Header="Начало" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding EndTime, StringFormat=HH:mm - dd.MM}"
+                    Header="Конец" />
+                <DataGridTemplateColumn Width="*" Header="Действия">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <!--  Command="{Binding DataContext. EditLessonCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"  -->
+                                <ui:Button
+                                    CommandParameter="{Binding Uid}"
+                                    Cursor="Hand"
+                                    Icon="Pen32">
+                                    <ui:SymbolIcon Symbol="Pen32" />
+                                </ui:Button>
+                                <!--  Command="{Binding DeleteLessonCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"  -->
+                                <ui:Button
+                                    Margin="5,0,0,0"
+                                    CommandParameter="{Binding Uid}"
+                                    Cursor="Hand">
+                                    <ui:SymbolIcon Symbol="Delete32" />
+                                </ui:Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</Page>
