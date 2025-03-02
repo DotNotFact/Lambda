@@ -1,11 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+ 
 	<ItemGroup>
-		<PackageReference Include="EFCore.NamingConventions" Version="9.0.0" />
-		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
-	</ItemGroup>
-
-	<ItemGroup>
+		<ProjectReference Include="..\..\..\Common\Lambda.Common.Infrastructure\Lambda.Common.Infrastructure.csproj" />
 		<ProjectReference Include="..\Lambda.Modules.Lessons.Application\Lambda.Modules.Lessons.Application.csproj" />
 		<ProjectReference Include="..\Lambda.Modules.Lessons.Presentation\Lambda.Modules.Lessons.Presentation.csproj" />
 	</ItemGroup>

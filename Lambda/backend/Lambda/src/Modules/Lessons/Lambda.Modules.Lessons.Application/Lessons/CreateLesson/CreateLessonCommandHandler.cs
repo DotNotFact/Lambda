@@ -1,4 +1,4 @@
-﻿using Lambda.Common.Domain.Abstractions.Data;
+﻿using Lambda.Common.Application.Data;
 using Lambda.Modules.Lessons.Domain.Lessons;
 using MediatR;
 
@@ -18,10 +18,10 @@ internal sealed class CreateLessonCommandHandler(ILessonRepository lessonReposit
             request.GroupUid,
             request.TeacherUid);
 
-        lessonRepository.Insert(lesson);
+        lessonRepository.Insert(lesson.Value);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return lesson.Uid;
+        return lesson.Value.Uid;
     }
 
 }

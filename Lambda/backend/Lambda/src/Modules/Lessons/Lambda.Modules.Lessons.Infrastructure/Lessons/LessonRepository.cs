@@ -1,6 +1,6 @@
-﻿using Lambda.Modules.Lessons.Domain.Lessons;
-using Lambda.Modules.Lessons.Infrastructure.Database;
-using Microsoft.EntityFrameworkCore;
+﻿using Lambda.Modules.Lessons.Infrastructure.Database;
+using Lambda.Modules.Lessons.Domain.Lessons;
+using Microsoft.EntityFrameworkCore; 
 
 namespace Lambda.Modules.Lessons.Infrastructure.Lessons;
 

@@ -2,13 +2,14 @@
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using MediatR;
+using MediatR; 
+using Lambda.Common.Presentation.Endpoints;
 
 namespace Lambda.Modules.Lessons.Presentation.Lessons;
 
-internal static class CreateLesson
+internal sealed class CreateLesson : IEndpoint
 {
-    public static void MapEndpoint(IEndpointRouteBuilder app)
+    public void MapEndpoint(IEndpointRouteBuilder app)
     {
         app.MapPost("lessons", async (Request request, ISender sender) =>
         {

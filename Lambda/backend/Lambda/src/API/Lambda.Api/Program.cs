@@ -1,10 +1,13 @@
 // using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Lambda.Modules.Lessons.Infrastructure;
+using Lambda.Common.Presentation.Endpoints;
+using Lambda.Common.Infrastructure;
 // using HealthChecks.UI.Client;
+using Lambda.Common.Application;
 using Lambda.Api.Extensions;
 using Lambda.Api.Middleware;
-using Serilog;
 using System.Reflection;
+using Serilog;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -19,26 +22,24 @@ builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configu
 services.AddEndpointsApiExplorer();
 services.AddSwaggerDocumentation();
 
-services.AddLessonsModule(builder.Configuration);
-
 Assembly[] moduleApplicationAssemblies = [
-    Lambda.Modules.Lessons.Application.AssemblyReference.Assembly, 
+    Lambda.Modules.Lessons.Application.AssemblyReference.Assembly,
 ];
 
- services.AddApplication(moduleApplicationAssemblies);
+services.AddApplication(moduleApplicationAssemblies);
 
-// string databaseConnectionString = configuration.GetConnectionStringOrThrow("Database");
+string databaseConnectionString = configuration.GetConnectionStringOrThrow("Database");
 // string redisConnectionString = configuration.GetConnectionStringOrThrow("Cache");
 
-// services.AddInfrastructure(
-//     DiagnosticsConfig.ServiceName,
-//     [
-//         EventsModule.ConfigureConsumers(redisConnectionString),
-//         TicketingModule.ConfigureConsumers,
-//         AttendanceModule.ConfigureConsumers
-//     ],
-//     databaseConnectionString,
-//     redisConnectionString);
+services.AddInfrastructure(
+    // DiagnosticsConfig.ServiceName,
+    //[
+    //    LessonModele.ConfigureConsumers(redisConnectionString),
+    //    // TicketingModule.ConfigureConsumers,
+    //    // AttendanceModule.ConfigureConsumers
+    //],
+    databaseConnectionString);
+// redisConnectionString);
 
 // Uri keyCloakHealthUrl = configuration.GetKeyCloakHealthUrl();
 
@@ -49,13 +50,10 @@ Assembly[] moduleApplicationAssemblies = [
 // .AddKeyCloak(keyCloakHealthUrl);
 
 
-// configuration.AddModuleConfiguration(["users", "events", "ticketing", "attendance"]);
-// 
-// services.AddEventsModule(configuration); 
-// services.AddUsersModule(configuration); 
-// services.AddTicketingModule(configuration); 
-// services.AddAttendanceModule(configuration);
+builder.Configuration.AddModuleConfiguration(["lessons",]);
 
+services.AddLessonsModule(configuration);
+// services.AddUsersModule(configuration);  
 
 WebApplication app = builder.Build();
 
@@ -79,10 +77,8 @@ app.UseSerilogRequestLogging();
 // app.UseExceptionHandler();
 
 // app.UseAuthentication();
-// app.UseAuthorization();
+// app.UseAuthorization(); 
 
-LessonsModule.MapEndpoints(app);
-
-// app.MapEndpoints();
+app.MapEndpoints();
 
 app.Run();

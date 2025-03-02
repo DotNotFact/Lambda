@@ -1,8 +1,8 @@
-﻿using Lambda.Modules.Lessons.Application.Abstractions.Data;
-using System.Data.Common;
+﻿using System.Data.Common;
+using Lambda.Common.Application.Data;
 using Npgsql;
 
-namespace Lambda.Modules.Lessons.Infrastructure.Data;
+namespace Lambda.Common.Infrastructure.Data;
 
 internal sealed class DbConnectionFactory(NpgsqlDataSource dataSource) : IDbConnectionFactory
 {

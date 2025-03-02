@@ -1,10 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+ 
 	<ItemGroup>
-		<FrameworkReference Include="Microsoft.AspNetCore.App" />
-	</ItemGroup>
-
-	<ItemGroup>
+	  <ProjectReference Include="..\..\..\Common\Lambda.Common.Presentation\Lambda.Common.Presentation.csproj" />
 	  <ProjectReference Include="..\Lambda.Modules.Lessons.Application\Lambda.Modules.Lessons.Application.csproj" />
 	</ItemGroup>
 

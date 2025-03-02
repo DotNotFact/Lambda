@@ -1,5 +1,6 @@
-﻿using Lambda.Modules.Lessons.Application.Abstractions.Data;
+﻿using Lambda.Common.Application.Data;
 using Lambda.Modules.Lessons.Domain.Lessons;
+using Lambda.Modules.Lessons.Infrastructure.Lessons;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lambda.Modules.Lessons.Infrastructure.Database;
@@ -12,7 +13,7 @@ public sealed class LessonsDbContext(DbContextOptions<LessonsDbContext> options)
     {
         modelBuilder.HasDefaultSchema(Schemas.Lessons);
 
-        modelBuilder.Entity<Lesson>().HasKey(l => l.Uid);
+        modelBuilder.ApplyConfiguration(new LessonConfiguration());
     }
 }
 

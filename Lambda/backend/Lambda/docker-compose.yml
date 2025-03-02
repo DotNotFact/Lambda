@@ -22,3 +22,19 @@ services:
       - ./.containers/db:/var/lib/postgresql/data
     ports:
       - 5432:5432
+
+  lambda.seq:
+    image: datalust/seq:latest
+    container_name: Lambda.Seq
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - 5341:5341
+      - 8081:80
+
+  # lambda.redis:
+  #   image: redis:latest
+  #   container_name: Lambda.Redis
+  #   restart: always
+  #   ports:
+  #     - 6379:6379
