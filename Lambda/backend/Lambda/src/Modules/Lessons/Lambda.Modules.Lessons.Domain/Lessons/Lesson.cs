@@ -1,9 +1,4 @@
-﻿using Lambda.Modules.Lessons.Domain.RetakeRequests;
-using Lambda.Modules.Lessons.Domain.Attendances;
-using Lambda.Modules.Lessons.Domain.Teachers;
-using Lambda.Modules.Lessons.Domain.Grades;
-using Lambda.Modules.Lessons.Domain.Groups;
-using Lambda.Common.Domain;
+﻿using Lambda.Common.Domain;
 
 namespace Lambda.Modules.Lessons.Domain.Lessons;
 
@@ -33,9 +28,7 @@ public class Lesson : Entity
 
     //public ICollection<RetakeRequest> RetakeRequests { get; set; }
 
-
-    // Исправленный метод Create в Lesson
-    public static Lesson Create(
+    public static Result<Lesson> Create(
         string subject,
         string description,
         string classroom,
@@ -44,6 +37,11 @@ public class Lesson : Entity
         Guid groupUid,
         Guid teacherUid)
     {
+        if (endsAtUtc < startsAtUtc)
+        {
+            return Result.Failure<Lesson>(LessonErrors.EndDatePrecedesStartDate);
+        }
+
         var lesson = new Lesson
         {
             Uid = Guid.NewGuid(),

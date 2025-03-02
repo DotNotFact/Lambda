@@ -1,4 +1,4 @@
-﻿using Lambda.Modules.Lessons.Application.Abstractions.Data;
+﻿using Lambda.Common.Domain.Abstractions.Data;
 using Lambda.Modules.Lessons.Domain.Lessons;
 using MediatR;
 

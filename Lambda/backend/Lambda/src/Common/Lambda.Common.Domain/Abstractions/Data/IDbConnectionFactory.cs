@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
 
-namespace Lambda.Modules.Lessons.Application.Abstractions.Data;
+namespace Lambda.Common.Domain.Abstractions.Data;
 
 public interface IDbConnectionFactory
 {

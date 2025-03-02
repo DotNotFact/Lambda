@@ -4,6 +4,7 @@ using Lambda.Modules.Lessons.Infrastructure;
 using Lambda.Api.Extensions;
 using Lambda.Api.Middleware;
 using Serilog;
+using System.Reflection;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -20,13 +21,11 @@ services.AddSwaggerDocumentation();
 
 services.AddLessonsModule(builder.Configuration);
 
-// Assembly[] moduleApplicationAssemblies = [
-//     Lambda.Modules.Users.Application.AssemblyReference.Assembly,
-//     Lambda.Modules.Events.Application.AssemblyReference.Assembly,
-//     Lambda.Modules.Ticketing.Application.AssemblyReference.Assembly,
-//     Lambda.Modules.Attendance.Application.AssemblyReference.Assembly, ];
+Assembly[] moduleApplicationAssemblies = [
+    Lambda.Modules.Lessons.Application.AssemblyReference.Assembly, 
+];
 
-// services.AddApplication(moduleApplicationAssemblies);
+ services.AddApplication(moduleApplicationAssemblies);
 
 // string databaseConnectionString = configuration.GetConnectionStringOrThrow("Database");
 // string redisConnectionString = configuration.GetConnectionStringOrThrow("Cache");
