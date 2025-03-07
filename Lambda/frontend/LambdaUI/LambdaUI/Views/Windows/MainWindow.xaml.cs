@@ -20,10 +20,10 @@ public partial class MainWindow : IWindow
         DataContext = this;
 
         InitializeComponent();
-          
+         
         navigationService.SetNavigationControl(RootNavigation);
-        Loaded += (_, _) => RootNavigation.Navigate(typeof(DashboardPage)); 
-    }
+        Loaded += (_, _) => RootNavigation.Navigate(typeof(LoginPage)); 
+    } 
 
     private void OnNavigationSelectionChanged(object sender, RoutedEventArgs e)
     {
@@ -55,6 +55,7 @@ public partial class MainWindow : IWindow
         _isPaneOpenedOrClosedFromCode = true;
         RootNavigation.SetCurrentValue(NavigationView.IsPaneOpenProperty, e.NewSize.Width > 1200);
         _isPaneOpenedOrClosedFromCode = false;
+        // TODO: Реализовать логику для адаптивного дизайна
     }
 
     private void NavigationView_OnPaneClosed(NavigationView sender, RoutedEventArgs args)

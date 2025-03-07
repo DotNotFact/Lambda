@@ -1,6 +1,6 @@
 ﻿namespace LambdaUI.Models;
 
-public class GradeDto
+public class Grade
 {
     public Guid Uid { get; set; } // Уникальный идентификатор оценки
     public Guid StudentUid { get; set; } // Внешний ключ на Student
@@ -9,6 +9,6 @@ public class GradeDto
     public DateTime GradeDate { get; set; }
 
     // Navigation properties
-    public StudentDto Student { get; set; }
-    public ScheduleEntty Schedule { get; set; }
+    public Student Student { get; set; }
+    public Schedule Schedule { get; set; }
 }

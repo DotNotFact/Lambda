@@ -1,6 +1,6 @@
 ﻿namespace LambdaUI.Models;
 
-public class DocumentDto
+public class Document
 {
     public Guid Uid { get; set; } // Уникальный идентификатор документа
     public Guid StudentUid { get; set; } // Внешний ключ на Student
@@ -9,5 +9,5 @@ public class DocumentDto
     public DateTime CreatedAt { get; set; }
 
     // Navigation properties
-    public StudentDto Student { get; set; }
+    public Student Student { get; set; }
 }

@@ -1,6 +1,6 @@
 ﻿namespace LambdaUI.Models;
 
-public class LearningMaterialDto
+public class LearningMaterial
 {
     public Guid Uid { get; set; } // Уникальный идентификатор учебного материала
     public Guid TeacherUid { get; set; } // Внешний ключ на Teacher
@@ -10,5 +10,5 @@ public class LearningMaterialDto
     public DateTime UploadDate { get; set; }
 
     // Navigation properties
-    public TeacherDto Teacher { get; set; }
+    public Teacher Teacher { get; set; }
 }

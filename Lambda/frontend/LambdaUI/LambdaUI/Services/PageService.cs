@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using Wpf.Ui.Abstractions;
 
 namespace LambdaUI.Services;
@@ -37,5 +38,5 @@ public class PageService(IServiceProvider serviceProvider) : INavigationViewPage
         }
 
         return _serviceProvider.GetService(pageType) as FrameworkElement;
-    } 
+    }
 }

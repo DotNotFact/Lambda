@@ -31,8 +31,8 @@ public partial class ProfilesViewModel : ObservableObject
     private void NextPage() { }
 
     // Данные для таблицы студентов
-    public ObservableCollection<StudentDto> Students { get; set; } = [];
-    public ObservableCollection<StudentDto> RecentActivities { get; set; } = [];
+    public ObservableCollection<Student> Students { get; set; } = [];
+    public ObservableCollection<Student> RecentActivities { get; set; } = [];
     
     public int TotalGroups { get; set; } = 10;
 
@@ -46,10 +46,10 @@ public partial class ProfilesViewModel : ObservableObject
     public ProfilesViewModel()
     {
         // Инициализация данных для таблицы
-        Students = new ObservableCollection<StudentDto>
+        Students = new ObservableCollection<Student>
         {
-            new StudentDto { Uid = Guid.NewGuid(), FirstName = "Иван", LastName = "Иванов", BirthDate = DateTime.Now.AddYears(-20), ContactInfo = "ivanov@example.com", Address = "Москва" },
-            new StudentDto { Uid = Guid.NewGuid(), FirstName = "Петр", LastName = "Петров", BirthDate = DateTime.Now.AddYears(-22), ContactInfo = "petrov@example.com", Address = "Санкт-Петербург" },
+            new Student { Uid = Guid.NewGuid(), FirstName = "Иван", LastName = "Иванов", BirthDate = DateTime.Now.AddYears(-20), ContactInfo = "ivanov@example.com", Address = "Москва" },
+            new Student { Uid = Guid.NewGuid(), FirstName = "Петр", LastName = "Петров", BirthDate = DateTime.Now.AddYears(-22), ContactInfo = "petrov@example.com", Address = "Санкт-Петербург" },
             // Добавьте больше студентов для примера
         };
     }

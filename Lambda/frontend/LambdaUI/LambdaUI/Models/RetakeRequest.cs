@@ -2,7 +2,7 @@
 
 namespace LambdaUI.Models;
 
-public class RetakeRequestDto
+public class RetakeRequest
 {
     public Guid Uid { get; set; } // Уникальный идентификатор запроса на пересдачу
     public Guid StudentUid { get; set; } // Внешний ключ на Student
@@ -11,6 +11,6 @@ public class RetakeRequestDto
     public RetakeRequestStatus Status { get; set; }
 
     // Navigation properties
-    public StudentDto Student { get; set; }
-    public ScheduleEntty Schedule { get; set; }
+    public Student Student { get; set; }
+    public Schedule Schedule { get; set; }
 }

@@ -25,7 +25,7 @@ public partial class NotificationsViewModel : ObservableObject
     private void NextPage() { }
 
     // Данные для списка уведомлений
-    public ObservableCollection<NotificationDto> Notifications { get; set; }
+    public ObservableCollection<Notification> Notifications { get; set; }
 
     // Параметры фильтрации
     [ObservableProperty]
@@ -45,10 +45,10 @@ public partial class NotificationsViewModel : ObservableObject
     public NotificationsViewModel()
     {
         // Инициализация данных для списка
-        Notifications = new ObservableCollection<NotificationDto>
+        Notifications = new ObservableCollection<Notification>
         {
-            new NotificationDto { Uid = Guid.NewGuid(), Message = "Изменено расписание", CreatedAt = DateTime.Now, Type = "Изменение" },
-            new NotificationDto { Uid = Guid.NewGuid(), Message = "Новое уведомление", CreatedAt = DateTime.Now, Type = "Новое" },
+            new Notification { Uid = Guid.NewGuid(), Message = "Изменено расписание", CreatedAt = DateTime.Now, Type = "Изменение" },
+            new Notification { Uid = Guid.NewGuid(), Message = "Новое уведомление", CreatedAt = DateTime.Now, Type = "Новое" },
             // Добавьте больше уведомлений для примера
         };
 

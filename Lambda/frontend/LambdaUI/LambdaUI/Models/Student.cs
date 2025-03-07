@@ -1,6 +1,6 @@
 ﻿namespace LambdaUI.Models;
 
-public class StudentDto
+public class Student
 {
     public Guid Uid { get; set; } // Уникальный идентификатор студента
     public Guid UserUid { get; set; } // Внешний ключ на User
@@ -15,12 +15,12 @@ public class StudentDto
     public Guid? ParentUid { get; set; } // Внешний ключ на Parent
 
     // Navigation properties
-    public UserDto User { get; set; }
-    public ParentDto Parent { get; set; }
-    public ICollection<GroupStudentDto> GroupStudents { get; set; }
-    public ICollection<AttendanceDto> Attendances { get; set; }
-    public ICollection<GradeDto> Grades { get; set; }
-    public ICollection<RetakeRequestDto> RetakeRequests { get; set; }
-    public ICollection<DocumentDto> Documents { get; set; }
-    public ICollection<FinancialDataDto> FinancialData { get; set; }
+    public User User { get; set; }
+    public Parent Parent { get; set; }
+    public ICollection<GroupStudent> GroupStudents { get; set; }
+    public ICollection<Attendance> Attendances { get; set; }
+    public ICollection<Grade> Grades { get; set; }
+    public ICollection<RetakeRequest> RetakeRequests { get; set; }
+    public ICollection<Document> Documents { get; set; }
+    public ICollection<FinancialData> FinancialData { get; set; }
 }

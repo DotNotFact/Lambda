@@ -119,7 +119,7 @@
                                 <ui:TextBlock
                                     Appearance="Secondary"
                                     Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                    Text="в активном поиске"
+                                    Text="..."
                                     TextWrapping="WrapWithOverflow" />
                             </StackPanel>
                         </ui:CardControl.Header>

@@ -14,11 +14,11 @@ public class ScheduleViewModel : ObservableObject
     public ICommand EditLessonCommand { get; }
 
     // Данные о расписании
-    public ObservableCollection<ScheduleEntty> Lessons { get; set; }
+    public ObservableCollection<Schedule> Lessons { get; set; }
 
     // Фильтры
-    private GroupDto _selectedGroup;
-    public GroupDto SelectedGroup
+    private Group _selectedGroup;
+    public Group SelectedGroup
     {
         get => _selectedGroup;
         set
@@ -28,8 +28,8 @@ public class ScheduleViewModel : ObservableObject
         }
     }
 
-    private TeacherDto _selectedTeacher;
-    public TeacherDto SelectedTeacher
+    private Teacher _selectedTeacher;
+    public Teacher SelectedTeacher
     {
         get => _selectedTeacher;
         set
@@ -50,16 +50,16 @@ public class ScheduleViewModel : ObservableObject
         }
     }
 
-    private ScheduleEntty _selectedLesson;
-    public ScheduleEntty SelectedLesson
+    private Schedule _selectedLesson;
+    public Schedule SelectedLesson
     {
         get => _selectedLesson;
         set => SetProperty(ref _selectedLesson, value);
     }
 
     // Список групп и преподавателей
-    public ObservableCollection<GroupDto> Groups { get; set; }
-    public ObservableCollection<TeacherDto> Teachers { get; set; }
+    public ObservableCollection<Group> Groups { get; set; }
+    public ObservableCollection<Teacher> Teachers { get; set; }
 
     public ScheduleViewModel()
     {
@@ -69,29 +69,29 @@ public class ScheduleViewModel : ObservableObject
         EditLessonCommand = new RelayCommand<Guid>(EditLesson);
 
         // Инициализация данных о расписании с тестовыми данными
-        Lessons = new ObservableCollection<ScheduleEntty>
+        Lessons = new ObservableCollection<Schedule>
         {
-            new ScheduleEntty { Uid = Guid.NewGuid(), Group = new GroupDto { Name = "Группа 1" }, Teacher = new TeacherDto { FirstName = "Иван", LastName = "Иванов" }, Subject = "Математика", Classroom = "101", StartTime = DateTime.Now, EndTime = DateTime.Now.AddHours(1) },
-            new ScheduleEntty { Uid = Guid.NewGuid(), Group = new GroupDto { Name = "Группа 2" }, Teacher = new TeacherDto { FirstName = "Петр", LastName = "Петров" }, Subject = "Физика", Classroom = "102", StartTime = DateTime.Now, EndTime = DateTime.Now.AddHours(1) },
-            new ScheduleEntty { Uid = Guid.NewGuid(), Group = new GroupDto { Name = "Группа 3" }, Teacher = new TeacherDto { FirstName = "Алексей", LastName = "Смирнов" }, Subject = "Химия", Classroom = "103", StartTime = DateTime.Now, EndTime = DateTime.Now.AddHours(1) },
+            new Schedule { Uid = Guid.NewGuid(), Group = new Group { Name = "Группа 1" }, Teacher = new Teacher { FirstName = "Иван", LastName = "Иванов" }, Subject = "Математика", Classroom = "101", StartTime = DateTime.Now, EndTime = DateTime.Now.AddHours(1) },
+            new Schedule { Uid = Guid.NewGuid(), Group = new Group { Name = "Группа 2" }, Teacher = new Teacher { FirstName = "Петр", LastName = "Петров" }, Subject = "Физика", Classroom = "102", StartTime = DateTime.Now, EndTime = DateTime.Now.AddHours(1) },
+            new Schedule { Uid = Guid.NewGuid(), Group = new Group { Name = "Группа 3" }, Teacher = new Teacher { FirstName = "Алексей", LastName = "Смирнов" }, Subject = "Химия", Classroom = "103", StartTime = DateTime.Now, EndTime = DateTime.Now.AddHours(1) },
             // Добавьте другие занятия
         };
 
         // Инициализация списка групп
-        Groups = new ObservableCollection<GroupDto>
+        Groups = new ObservableCollection<Group>
         {
-            new GroupDto { Uid = Guid.NewGuid(), Name = "Группа 1" },
-            new GroupDto { Uid = Guid.NewGuid(), Name = "Группа 2" },
-            new GroupDto { Uid = Guid.NewGuid(), Name = "Группа 3" },
+            new Group { Uid = Guid.NewGuid(), Name = "Группа 1" },
+            new Group { Uid = Guid.NewGuid(), Name = "Группа 2" },
+            new Group { Uid = Guid.NewGuid(), Name = "Группа 3" },
             // Добавьте другие группы
         };
 
         // Инициализация списка преподавателей
-        Teachers = new ObservableCollection<TeacherDto>
+        Teachers = new ObservableCollection<Teacher>
         {
-            new TeacherDto { Uid = Guid.NewGuid(), FirstName = "Иван", LastName = "Иванов" },
-            new TeacherDto { Uid = Guid.NewGuid(), FirstName = "Петр", LastName = "Петров" },
-            new TeacherDto { Uid = Guid.NewGuid(), FirstName = "Алексей", LastName = "Смирнов" },
+            new Teacher { Uid = Guid.NewGuid(), FirstName = "Иван", LastName = "Иванов" },
+            new Teacher { Uid = Guid.NewGuid(), FirstName = "Петр", LastName = "Петров" },
+            new Teacher { Uid = Guid.NewGuid(), FirstName = "Алексей", LastName = "Смирнов" },
             // Добавьте другие преподаватели
         };
     }
@@ -100,7 +100,7 @@ public class ScheduleViewModel : ObservableObject
     {
         // Логика для добавления случайного занятия
         var random = new Random();
-        var newLesson = new ScheduleEntty
+        var newLesson = new Schedule
         {
             Uid = Guid.NewGuid(),
             Group = Groups[random.Next(Groups.Count)],
@@ -140,17 +140,17 @@ public class ScheduleViewModel : ObservableObject
 
         if (SelectedGroup != null)
         {
-            filteredLessons = new ObservableCollection<ScheduleEntty>(filteredLessons.Where(l => l.Group.Name == SelectedGroup.Name));
+            filteredLessons = new ObservableCollection<Schedule>(filteredLessons.Where(l => l.Group.Name == SelectedGroup.Name));
         }
 
         if (SelectedTeacher != null)
         {
-            filteredLessons = new ObservableCollection<ScheduleEntty>(filteredLessons.Where(l => l.Teacher.FirstName == SelectedTeacher.FirstName && l.Teacher.LastName == SelectedTeacher.LastName));
+            filteredLessons = new ObservableCollection<Schedule>(filteredLessons.Where(l => l.Teacher.FirstName == SelectedTeacher.FirstName && l.Teacher.LastName == SelectedTeacher.LastName));
         }
 
         if (SelectedDate.HasValue)
         {
-            filteredLessons = new ObservableCollection<ScheduleEntty>(filteredLessons.Where(l => l.StartTime.Date == SelectedDate.Value.Date));
+            filteredLessons = new ObservableCollection<Schedule>(filteredLessons.Where(l => l.StartTime.Date == SelectedDate.Value.Date));
         }
 
         Lessons = filteredLessons;

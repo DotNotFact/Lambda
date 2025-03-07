@@ -18,12 +18,12 @@ public partial class AttendanceViewModel : ObservableObject
     private void GenerateReport() { }
 
     // Данные о посещаемости
-    public ObservableCollection<AttendanceDto> Attendances { get; set; }
+    public ObservableCollection<Attendance> Attendances { get; set; }
 
     // Фильтры
     [ObservableProperty]
-    private GroupDto _selectedGroup;
-    partial void OnSelectedGroupChanged(GroupDto value)
+    private Group _selectedGroup;
+    partial void OnSelectedGroupChanged(Group value)
     {
         LoadAttendances();
     }
@@ -36,7 +36,7 @@ public partial class AttendanceViewModel : ObservableObject
     }
 
     // Список групп
-    public ObservableCollection<GroupDto> Groups { get; set; }
+    public ObservableCollection<Group> Groups { get; set; }
 
     // Варианты статуса
     public ObservableCollection<string> StatusOptions { get; set; }
@@ -44,18 +44,18 @@ public partial class AttendanceViewModel : ObservableObject
     public AttendanceViewModel()
     {
         // Инициализация данных о посещаемости с тестовыми данными
-        Attendances = new ObservableCollection<AttendanceDto>
+        Attendances = new ObservableCollection<Attendance>
         {
-            new AttendanceDto { Uid = Guid.NewGuid(), Student = new StudentDto { FirstName = "Иван", LastName = "Иванов" }, Schedule = new ScheduleEntty { Group = new GroupDto { Name = "Группа 1" }, StartTime = DateTime.Now }, Status = AttendanceStatus.Present },
-            new AttendanceDto { Uid = Guid.NewGuid(), Student = new StudentDto { FirstName = "Петр", LastName = "Петров" }, Schedule = new ScheduleEntty { Group = new GroupDto { Name = "Группа 1" }, StartTime = DateTime.Now }, Status = AttendanceStatus.Absent },
+            new Attendance { Uid = Guid.NewGuid(), Student = new Student { FirstName = "Иван", LastName = "Иванов" }, Schedule = new Schedule { Group = new Group { Name = "Группа 1" }, StartTime = DateTime.Now }, Status = AttendanceStatus.Present },
+            new Attendance { Uid = Guid.NewGuid(), Student = new Student { FirstName = "Петр", LastName = "Петров" }, Schedule = new Schedule { Group = new Group { Name = "Группа 1" }, StartTime = DateTime.Now }, Status = AttendanceStatus.Absent },
             // Добавьте другие записи
         };
 
         // Инициализация списка групп
-        Groups = new ObservableCollection<GroupDto>
+        Groups = new ObservableCollection<Group>
         {
-            new GroupDto { Uid = Guid.NewGuid(), Name = "Группа 1" },
-            new GroupDto { Uid = Guid.NewGuid(), Name = "Группа 2" },
+            new Group { Uid = Guid.NewGuid(), Name = "Группа 1" },
+            new Group { Uid = Guid.NewGuid(), Name = "Группа 2" },
             // Добавьте другие группы
         };
 

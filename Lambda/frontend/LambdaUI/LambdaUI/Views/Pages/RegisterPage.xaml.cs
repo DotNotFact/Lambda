@@ -1,4 +1,5 @@
 ﻿using LambdaUI.ViewModels.Pages;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace LambdaUI.Views.Pages;
@@ -9,5 +10,5 @@ public partial class RegisterPage : Page
     {
         InitializeComponent();
         DataContext = viewModel;
-    }
+    } 
 }
