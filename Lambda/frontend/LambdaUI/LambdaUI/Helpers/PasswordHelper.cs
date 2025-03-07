@@ -1,17 +1,8 @@
-﻿using LambdaUI.ViewModels.Pages;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using System.Xml.Linq;
 
-namespace LambdaUI.Views.Pages;
- 
-public partial class LoginPage : Page
-{
-    public LoginPage(LoginViewModel viewModel)
-    {
-        InitializeComponent();
-        DataContext = viewModel;
-    } 
-}
+namespace LambdaUI.Helpers;
 
 public static class PasswordHelper
 {
@@ -20,7 +11,7 @@ public static class PasswordHelper
             "Password",
             typeof(string),
             typeof(PasswordHelper),
-            new FrameworkPropertyMetadata(string.Empty, OnPasswordPropertyChanged));
+            new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnPasswordPropertyChanged));
 
     public static readonly DependencyProperty AttachProperty =
         DependencyProperty.RegisterAttached(
@@ -35,9 +26,10 @@ public static class PasswordHelper
         {
             passwordBox.PasswordChanged -= PasswordChanged;
 
-            if (!GetAttach(passwordBox))
+            if (GetAttach(passwordBox))
             {
                 passwordBox.PasswordChanged += PasswordChanged;
+                // passwordBox.Password = GetPassword(passwordBox);
             }
         }
     }

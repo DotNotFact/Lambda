@@ -24,7 +24,7 @@ public partial class DocumentsViewModel : ObservableObject
     private void NextPage() { }
 
     // Данные для таблицы документов
-    public ObservableCollection<DocumentDto> Documents { get; set; }
+    public ObservableCollection<Document> Documents { get; set; }
 
     // Параметры поиска и фильтрации
     [ObservableProperty]
@@ -42,8 +42,8 @@ public partial class DocumentsViewModel : ObservableObject
     {
         // Инициализация данных для таблицы
         Documents = [
-            new DocumentDto { Uid = Guid.NewGuid(), DocumentType = "Зачетная книжка", Student = new StudentDto { FirstName = "Иван", LastName = "Иванов" }, CreatedAt = DateTime.Now, DocumentData = "Данные документа" },
-            new DocumentDto { Uid = Guid.NewGuid(), DocumentType = "Диплом", Student = new StudentDto { FirstName = "Петр", LastName = "Петров" }, CreatedAt = DateTime.Now, DocumentData = "Данные документа" },
+            new Document { Uid = Guid.NewGuid(), DocumentType = "Зачетная книжка", Student = new Student { FirstName = "Иван", LastName = "Иванов" }, CreatedAt = DateTime.Now, DocumentData = "Данные документа" },
+            new Document { Uid = Guid.NewGuid(), DocumentType = "Диплом", Student = new Student { FirstName = "Петр", LastName = "Петров" }, CreatedAt = DateTime.Now, DocumentData = "Данные документа" },
             // Добавьте больше документов для примера
         ];
 

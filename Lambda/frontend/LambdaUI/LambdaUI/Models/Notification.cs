@@ -1,6 +1,6 @@
 ﻿namespace LambdaUI.Models;
 
-public class NotificationDto
+public class Notification
 {
     public Guid Uid { get; set; } // Уникальный идентификатор уведомления
     public Guid UserUid { get; set; } // Внешний ключ на User
@@ -8,7 +8,7 @@ public class NotificationDto
     public DateTime CreatedAt { get; set; }
 
     // Navigation properties
-    public UserDto User { get; set; }
+    public User User { get; set; }
     public string Type { get; set; }
 }
 

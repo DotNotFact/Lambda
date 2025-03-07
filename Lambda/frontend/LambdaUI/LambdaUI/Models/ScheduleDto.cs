@@ -1,6 +1,6 @@
 ﻿namespace LambdaUI.Models;
 
-public class ScheduleEntty
+public class Schedule
 {
     public Guid Uid { get; set; } // Уникальный идентификатор расписания
     public Guid GroupUid { get; set; } // Внешний ключ на Group
@@ -11,10 +11,10 @@ public class ScheduleEntty
     public DateTime EndTime { get; set; }
 
     // Navigation properties
-    public GroupDto Group { get; set; }
-    public TeacherDto Teacher { get; set; }
-    public ICollection<AttendanceDto> Attendances { get; set; }
-    public ICollection<GradeDto> Grades { get; set; }
-    public ICollection<LessonLogDto> LessonLogs { get; set; }
-    public ICollection<RetakeRequestDto> RetakeRequests { get; set; }
+    public Group Group { get; set; }
+    public Teacher Teacher { get; set; }
+    public ICollection<Attendance> Attendances { get; set; }
+    public ICollection<Grade> Grades { get; set; }
+    public ICollection<LessonLog> LessonLogs { get; set; }
+    public ICollection<RetakeRequest> RetakeRequests { get; set; }
 }

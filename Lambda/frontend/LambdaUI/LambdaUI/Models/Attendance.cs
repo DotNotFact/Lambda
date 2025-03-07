@@ -2,7 +2,7 @@
 
 namespace LambdaUI.Models;
 
-public class AttendanceDto
+public class Attendance
 {
     public Guid Uid { get; set; } // Уникальный идентификатор посещаемости
     public Guid StudentUid { get; set; } // Внешний ключ на Student
@@ -10,6 +10,6 @@ public class AttendanceDto
     public AttendanceStatus Status { get; set; }
 
     // Navigation properties
-    public StudentDto Student { get; set; }
-    public ScheduleEntty Schedule { get; set; }
+    public Student Student { get; set; }
+    public Schedule Schedule { get; set; }
 }

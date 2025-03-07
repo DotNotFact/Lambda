@@ -4,8 +4,10 @@ using Microsoft.Extensions.Hosting;
 using LambdaUI.ViewModels.Windows;
 using LambdaUI.ViewModels.Pages;
 using LambdaUI.Views.Windows;
+using LambdaUI.Repositories;
 using LambdaUI.Views.Pages;
 using LambdaUI.Services;
+using LambdaUI.Models;
 using System.Windows;
 using Wpf.Ui;
 
@@ -26,7 +28,28 @@ public partial class App : Application
 
             //// Регистрация сервисов
             //_ = services.AddSingleton<IUserService, UserService>();
-            //_ = services.AddSingleton<IPasswordHasher<UserDto>, PasswordHasher>();
+            //_ = services.AddSingleton<IPasswordHasher<User>, PasswordHasher>();
+
+            // Репозитории
+            services.AddSingleton<IRepository<User>, Repository<User>>();
+            services.AddSingleton<IRepository<Student>, Repository<Student>>();
+            services.AddSingleton<IRepository<Teacher>, Repository<Teacher>>();
+            services.AddSingleton<IRepository<Parent>, Repository<Parent>>();
+            services.AddSingleton<IRepository<Group>, Repository<Group>>();
+            services.AddSingleton<IRepository<GroupStudent>, Repository<GroupStudent>>();
+            services.AddSingleton<IRepository<Schedule>, Repository<Schedule>>();
+            services.AddSingleton<IRepository<Attendance>, Repository<Attendance>>();
+            services.AddSingleton<IRepository<Grade>, Repository<Grade>>();
+            services.AddSingleton<IRepository<RetakeRequest>, Repository<RetakeRequest>>();
+            services.AddSingleton<IRepository<LessonLog>, Repository<LessonLog>>();
+            services.AddSingleton<IRepository<Notification>, Repository<Notification>>();
+            services.AddSingleton<IRepository<Document>, Repository<Document>>();
+            services.AddSingleton<IRepository<FinancialData>, Repository<FinancialData>>();
+
+            // Сервисы
+            services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<INotificationService, NotificationService>();
+            // Другие сервисы: StudentService, GroupService, ScheduleService и т.д.
 
             //// Регистрация навигации
             _ = services.AddSingleton<INavigationService, NavigationService>();
@@ -48,6 +71,8 @@ public partial class App : Application
             _ = services.AddTransient<DocumentsViewModel>();
             _ = services.AddTransient<AdministrationViewModel>();
             _ = services.AddTransient<SettingsViewModel>();
+            _ = services.AddTransient<RegisterViewModel>();
+            _ = services.AddTransient<LoginViewModel>();
 
             // Регистрация страниц
             _ = services.AddTransient<DashboardPage>();
@@ -61,6 +86,8 @@ public partial class App : Application
             _ = services.AddTransient<DocumentsPage>();
             _ = services.AddTransient<AdministrationPage>();
             _ = services.AddTransient<SettingsPage>();
+            _ = services.AddTransient<RegisterPage>();
+            _ = services.AddTransient<LoginPage>();
 
             //  All other pages and view models
             // _ = services.AddTransientFromNamespace("LambdaUI.Views", LambdaUIAssembly.Asssembly);
@@ -81,6 +108,8 @@ public partial class App : Application
     /// </summary>
     private void OnStartup(object sender, StartupEventArgs e)
     {
+        LocalStorageService.Initialize();
+
         var mainWindow = GetRequiredService<IWindow>();
         mainWindow.Show();
 

@@ -2,7 +2,7 @@
 
 namespace LambdaUI.Models;
 
-public class UserDto
+public class User
 {
     public Guid Uid { get; set; }
     public string Username { get; set; }
@@ -12,12 +12,12 @@ public class UserDto
     public DateTime CreatedAt { get; set; }
 
     // Navigation properties
-    public StudentDto Student { get; set; }
+    public Student Student { get; set; }
     public Guid? StudentUid { get; set; }
-    public TeacherDto Teacher { get; set; }
+    public Teacher Teacher { get; set; }
     public Guid? TeacherUid { get; set; }
-    public ParentDto Parent { get; set; }
+    public Parent Parent { get; set; }
     public Guid? ParentUid { get; set; }
 
-    public IEnumerable<NotificationDto> Notifications { get; set; }
+    public IEnumerable<Notification> Notifications { get; set; }
 }

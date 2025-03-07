@@ -2,7 +2,7 @@
 
 namespace LambdaUI.Models;
 
-public class FinancialDataDto
+public class FinancialData
 {
     public Guid Uid { get; set; } // Уникальный идентификатор финансовых данных
     public Guid StudentUid { get; set; } // Внешний ключ на Student
@@ -11,5 +11,5 @@ public class FinancialDataDto
     public PaymentType PaymentType { get; set; }
 
     // Navigation properties
-    public StudentDto Student { get; set; }
+    public Student Student { get; set; }
 }

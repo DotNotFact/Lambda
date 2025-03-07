@@ -9,10 +9,10 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:vm="clr-namespace:LambdaUI.ViewModels.Windows"
     Title="{Binding ViewModel.ApplicationTitle, Mode=OneWay}"
-    Width="750"
-    Height="525"
-    MinWidth="750"
-    MinHeight="525"
+    Width="900"
+    Height="600"
+    MinWidth="900"
+    MinHeight="600"
     d:DataContext="{d:DesignInstance vm:MainWindowViewModel,
                                      IsDesignTimeCreatable=False}"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
@@ -47,10 +47,51 @@
             MenuItemsSource="{Binding ViewModel.MenuItems, Mode=OneWay}"
             OpenPaneLength="200"
             PaneClosed="NavigationView_OnPaneClosed"
-            PaneDisplayMode="Left"
+            PaneDisplayMode="Left"  
             PaneOpened="NavigationView_OnPaneOpened"
             SelectionChanged="OnNavigationSelectionChanged"
             Transition="FadeInWithSlide">
+
+            <ui:NavigationView.PaneFooter>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                    <ui:Button  
+                        Cursor="Hand"
+                        Command="{Binding ViewModel.LogoutCommand}" 
+                        Padding="10"
+                        Margin="2 5"
+                        Width="200"
+                        HorizontalContentAlignment="Left">
+
+                        <ui:Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=ViewModel.IsAuthenticated}" Value="False">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ui:Button.Style>
+
+                        <StackPanel Orientation="Horizontal" >
+
+                            <ui:SymbolIcon Symbol="Door28" />
+
+                            <TextBlock Margin="10 0 0 0" Text="Выйти">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=ViewModel.IsAuthenticated}" Value="False">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                        </StackPanel>
+                    </ui:Button>
+                </StackPanel>
+            </ui:NavigationView.PaneFooter>
 
             <ui:NavigationView.ContentOverlay>
                 <Grid>

@@ -27,14 +27,14 @@ public partial class GroupsViewModel : ObservableObject
     private void ApplyFilters() { }
 
     // Данные о группах
-    public ObservableCollection<GroupDto> Groups { get; set; }
+    public ObservableCollection<Group> Groups { get; set; }
 
     // Фильтры
     [ObservableProperty]
     private string _searchQuery;
 
     [ObservableProperty]
-    private TeacherDto _selectedTeacher;
+    private Teacher _selectedTeacher;
 
     [ObservableProperty]
     private ObservableCollection<string> _filterOptions;
@@ -46,23 +46,23 @@ public partial class GroupsViewModel : ObservableObject
     private DateTime? _selectedDate;
 
     // Преподаватели
-    public ObservableCollection<TeacherDto> Teachers { get; set; }
+    public ObservableCollection<Teacher> Teachers { get; set; }
 
     public GroupsViewModel()
     {
         // Инициализация данных о группах
-        Groups = new ObservableCollection<GroupDto>
+        Groups = new ObservableCollection<Group>
         {
-            new GroupDto { Uid = Guid.NewGuid(), Name = "Группа 1", Teacher = new TeacherDto { FirstName = "Иван", LastName = "Иванов" } },
-            new GroupDto { Uid = Guid.NewGuid(), Name = "Группа 2", Teacher = new TeacherDto { FirstName = "Петр", LastName = "Петров" } },
+            new Group { Uid = Guid.NewGuid(), Name = "Группа 1", Teacher = new Teacher { FirstName = "Иван", LastName = "Иванов" } },
+            new Group { Uid = Guid.NewGuid(), Name = "Группа 2", Teacher = new Teacher { FirstName = "Петр", LastName = "Петров" } },
             // Добавьте другие группы
         };
 
         // Инициализация преподавателей
-        Teachers = new ObservableCollection<TeacherDto>
+        Teachers = new ObservableCollection<Teacher>
         {
-            new TeacherDto { Uid = Guid.NewGuid(), FirstName = "Иван", LastName = "Иванов" },
-            new TeacherDto { Uid = Guid.NewGuid(), FirstName = "Петр", LastName = "Петров" },
+            new Teacher { Uid = Guid.NewGuid(), FirstName = "Иван", LastName = "Иванов" },
+            new Teacher { Uid = Guid.NewGuid(), FirstName = "Петр", LastName = "Петров" },
             // Добавьте другие преподаватели
         };
 

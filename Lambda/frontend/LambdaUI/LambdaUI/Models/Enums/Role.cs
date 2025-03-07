@@ -7,5 +7,6 @@ public enum Role
     DeputyDirector,
     Admin,
     Director,
-    Parent
+    Parent,
+    Administrator
 }

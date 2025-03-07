@@ -1,6 +1,6 @@
 ﻿namespace LambdaUI.Models;
 
-public class ParentDto
+public class Parent
 {
     public Guid Uid { get; set; }
     public string FirstName { get; set; }
@@ -8,7 +8,7 @@ public class ParentDto
     public string ContactInfo { get; set; }
     public string Address { get; set; }
 
-    public UserDto User { get; set; }
+    public User User { get; set; }
 
-    public ICollection<StudentDto> Students { get; set; }
+    public ICollection<Student> Students { get; set; }
 }
